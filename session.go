@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sync/atomic"
 
 	websocket "golang.org/x/net/websocket"
 
@@ -42,19 +41,17 @@ func (session *Session) Close() error {
 }
 
 func (session *Session) Receive() (slack.Event, error) {
-	event := slack.Event{}
+	event := slack.BaseEvent{}
 	err := websocket.JSON.Receive(session.conn, &event)
 	if err != nil {
 		fmt.Print(err)
 	}
 
-	return event, err
+	return event.ConcreteEvent(), err
 }
 
-var counter uint64
-
 func (session *Session) Send(event slack.Event) error {
-	event.Id = atomic.AddUint64(&counter, 1)
+	event.SetNextId()
 	return websocket.JSON.Send(session.conn, event)
 }
 

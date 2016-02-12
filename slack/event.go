@@ -1,16 +1,44 @@
 package slack
 
-import "fmt"
+import (
+	"fmt"
+	"sync/atomic"
+)
 
-type Event struct {
+var counter uint64
+
+type BaseEvent struct {
 	Id      uint64 `json:"id"`
 	Type    string `json:"type"`
 	Channel string `json:"channel"`
 	Text    string `json:"text"`
 }
 
-func (event Event) String() string {
+type Event interface {
+	String() string
+	ConcreteEvent() Event
+	SetNextId()
+}
+
+func (event BaseEvent) String() string {
 	return fmt.Sprintf(
 		"{ Id: %d, Type: %s, Channel: %s, Text: %s }",
 		event.Id, event.Type, event.Channel, event.Text)
+}
+
+func (event BaseEvent) ConcreteEvent() Event {
+	switch event.Type {
+	case "message":
+		return MessageEvent{&event}
+	default:
+		return event
+	}
+}
+
+func (event BaseEvent) SetNextId() {
+	event.Id = atomic.AddUint64(&counter, 1)
+}
+
+type MessageEvent struct {
+	*BaseEvent
 }
