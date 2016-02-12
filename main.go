@@ -20,12 +20,12 @@ func main() {
 	}
 	defer session.Close()
 
-	msg := Message{}
+	event := Event{}
 	for {
-		if err := session.Receive(&msg); err != nil {
+		if err := session.Receive(&event); err != nil {
 			return
 		}
 
-		fmt.Println(msg)
+		fmt.Println(event)
 	}
 }

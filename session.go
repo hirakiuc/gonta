@@ -17,7 +17,7 @@ type Session struct {
 	conn   *websocket.Conn
 }
 
-type Message struct {
+type Event struct {
 	Id      uint64 `json:"id"`
 	Type    string `json:"type"`
 	Channel string `json:"channel"`
@@ -48,15 +48,15 @@ func (session *Session) Close() error {
 	return err
 }
 
-func (session *Session) Receive(msg *Message) error {
-	return websocket.JSON.Receive(session.conn, msg)
+func (session *Session) Receive(event *Event) error {
+	return websocket.JSON.Receive(session.conn, event)
 }
 
 var counter uint64
 
-func (session *Session) Send(msg Message) error {
-	msg.Id = atomic.AddUint64(&counter, 1)
-	return websocket.JSON.Send(session.conn, msg)
+func (session *Session) Send(event Event) error {
+	event.Id = atomic.AddUint64(&counter, 1)
+	return websocket.JSON.Send(session.conn, event)
 }
 
 func (session *Session) fetchWssUrl() (err error) {
