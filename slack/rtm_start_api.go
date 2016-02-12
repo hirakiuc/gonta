@@ -1,4 +1,4 @@
-package slackapi
+package slack
 
 import (
 	"fmt"

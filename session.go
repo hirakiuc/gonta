@@ -6,7 +6,7 @@ import (
 
 	websocket "golang.org/x/net/websocket"
 
-	"./slackapi"
+	"./slack"
 )
 
 const WS_ORIGIN = "https://api.slack.com/"
@@ -15,13 +15,6 @@ type Session struct {
 	Token  string
 	wssUrl string
 	conn   *websocket.Conn
-}
-
-type Event struct {
-	Id      uint64 `json:"id"`
-	Type    string `json:"type"`
-	Channel string `json:"channel"`
-	Text    string `json:"text"`
 }
 
 func (session *Session) Start() error {
@@ -48,19 +41,25 @@ func (session *Session) Close() error {
 	return err
 }
 
-func (session *Session) Receive(event *Event) error {
-	return websocket.JSON.Receive(session.conn, event)
+func (session *Session) Receive() (slack.Event, error) {
+	event := slack.Event{}
+	err := websocket.JSON.Receive(session.conn, &event)
+	if err != nil {
+		fmt.Print(err)
+	}
+
+	return event, err
 }
 
 var counter uint64
 
-func (session *Session) Send(event Event) error {
+func (session *Session) Send(event slack.Event) error {
 	event.Id = atomic.AddUint64(&counter, 1)
 	return websocket.JSON.Send(session.conn, event)
 }
 
 func (session *Session) fetchWssUrl() (err error) {
-	req := slackapi.RtmStartApi{session.Token}
+	req := slack.RtmStartApi{session.Token}
 	session.wssUrl, err = req.WssUrl()
 	if err != nil {
 		fmt.Print("Session.fetchWssUrl:", err)

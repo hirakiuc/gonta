@@ -20,9 +20,9 @@ func main() {
 	}
 	defer session.Close()
 
-	event := Event{}
 	for {
-		if err := session.Receive(&event); err != nil {
+		event, err := session.Receive()
+		if err != nil {
 			return
 		}
 
