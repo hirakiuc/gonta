@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/vim,go
 
+###
+./gonta
+
 ### Vim ###
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
