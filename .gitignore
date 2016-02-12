@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/vim,go
 
 ###
-./gonta
+gonta
 
 ### Vim ###
 [._]*.s[a-w][a-z]
