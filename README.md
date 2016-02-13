@@ -7,8 +7,8 @@ gonta is a simple slack bot in golang.
 This project use [mattn/gom](https://github.com/mattn/gom) for dependency management.
 
 ```
-$ gom install
-$ go build
+$ make vendor_get
+$ make
 ```
 
 ## License
