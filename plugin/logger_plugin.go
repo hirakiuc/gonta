@@ -1,7 +1,6 @@
 package plugin
 
 import (
-	"fmt"
 	"time"
 
 	"../slack"
@@ -18,5 +17,5 @@ func (plugin *LoggerPlugin) IsAccept(event slack.Event) bool {
 }
 
 func (plugin *LoggerPlugin) Notify(session *slack.Session, event slack.Event) {
-	fmt.Println(time.Now().Format(time.RFC3339), " : ", event)
+	log.Info("%s %v", time.Now().Format(time.RFC3339), event)
 }

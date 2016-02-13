@@ -1,6 +1,9 @@
 package plugin
 
-import "../slack"
+import (
+	"../logger"
+	"../slack"
+)
 
 type Plugin interface {
 	// Get Plugin Instance
@@ -18,6 +21,11 @@ type PluginRegistry struct {
 }
 
 var registry *PluginRegistry
+var log *logger.Logger
+
+func init() {
+	log = logger.GetLogger()
+}
 
 func GetRegistry() *PluginRegistry {
 	if registry == nil {

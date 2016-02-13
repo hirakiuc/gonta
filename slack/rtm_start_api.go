@@ -21,25 +21,25 @@ func (api *RtmStartApi) requestUrl() string {
 func (api *RtmStartApi) WssUrl() (url string, err error) {
 	res, err := http.Get(api.requestUrl())
 	if err != nil {
-		fmt.Println(err)
+		log.Error("Failed to get rtm.start method: %v", err)
 		return "", err
 	}
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		fmt.Println(err)
+		log.Error("Failed to receive message: %v", err)
 		return "", err
 	}
 
 	js, err := simpleJson.NewJson(body)
 	if err != nil {
-		fmt.Print(err)
+		log.Error("Failed to parse json: %v", err)
 		return "", err
 	}
 
 	wss, err := js.Get("url").String()
 	if err != nil {
-		fmt.Print(err)
+		log.Error("Failed to find wssurl: %v", err)
 		return
 	}
 

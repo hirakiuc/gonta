@@ -1,17 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
+	"./logger"
 	"./plugin"
 	"./slack"
 )
 
+var log *logger.Logger
+
+func init() {
+	log = logger.GetLogger()
+}
+
 func main() {
 	apiToken := os.Getenv("SLACK_API_TOKEN")
 	if len(apiToken) == 0 {
-		fmt.Println("SLACK_API_TOKEN is required.")
+		log.Error("SLACK_API_TOKEN is required.")
 		return
 	}
 

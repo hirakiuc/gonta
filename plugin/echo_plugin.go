@@ -1,10 +1,6 @@
 package plugin
 
-import (
-	"fmt"
-
-	"../slack"
-)
+import "../slack"
 
 // EchoPlugin provides Echo response.
 type EchoPlugin struct{}
@@ -25,10 +21,10 @@ func (plugin *EchoPlugin) IsAccept(event slack.Event) bool {
 
 // Notify the event to this EchoPlugin.
 func (plugin *EchoPlugin) Notify(session *slack.Session, event slack.Event) {
-	fmt.Println("EchoPlugin:", event)
+	log.Debug("EchoPlugin: %v", event)
 	evt, ok := event.(slack.MessageEvent)
 	if ok == false {
-		fmt.Println("EchoEvent:", ok, evt)
+		log.Debug("EchoEvent: %v %v", ok, evt)
 		return
 	}
 
@@ -41,8 +37,8 @@ func (plugin *EchoPlugin) Notify(session *slack.Session, event slack.Event) {
 
 	err := session.Send(msg)
 	if err != nil {
-		fmt.Println("EchoPlugin failed: ", err)
-	} else {
-		fmt.Println("EchoPlugin success.")
+		log.Error("EchoPlugin failed: %v", err)
 	}
+
+	log.Info("EchoPlugin success.")
 }
