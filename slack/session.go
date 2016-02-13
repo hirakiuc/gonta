@@ -1,11 +1,9 @@
-package main
+package slack
 
 import (
 	"fmt"
 
 	websocket "golang.org/x/net/websocket"
-
-	"./slack"
 )
 
 const WS_ORIGIN = "https://api.slack.com/"
@@ -40,8 +38,8 @@ func (session *Session) Close() error {
 	return err
 }
 
-func (session *Session) Receive() (slack.Event, error) {
-	event := slack.BaseEvent{}
+func (session *Session) Receive() (Event, error) {
+	event := BaseEvent{}
 	err := websocket.JSON.Receive(session.conn, &event)
 	if err != nil {
 		fmt.Print(err)
@@ -50,13 +48,13 @@ func (session *Session) Receive() (slack.Event, error) {
 	return event.ConcreteEvent(), err
 }
 
-func (session *Session) Send(event slack.Event) error {
+func (session *Session) Send(event Event) error {
 	event.SetNextId()
 	return websocket.JSON.Send(session.conn, event)
 }
 
 func (session *Session) fetchWssUrl() (err error) {
-	req := slack.RtmStartApi{session.Token}
+	req := RtmStartApi{session.Token}
 	session.wssUrl, err = req.WssUrl()
 	if err != nil {
 		fmt.Print("Session.fetchWssUrl:", err)

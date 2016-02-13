@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"./plugin"
+	"./slack"
 )
 
 func main() {
@@ -12,13 +15,16 @@ func main() {
 		return
 	}
 
-	session := Session{Token: apiToken}
-
+	session := slack.Session{Token: apiToken}
 	err := session.Start()
 	if err != nil {
 		return
 	}
 	defer session.Close()
+
+	registry := plugin.GetRegistry()
+	registry.AddPlugin(&plugin.EchoPlugin{})
+	registry.AddPlugin(&plugin.LoggerPlugin{})
 
 	for {
 		event, err := session.Receive()
@@ -26,6 +32,6 @@ func main() {
 			return
 		}
 
-		fmt.Println(event)
+		registry.Notify(&session, event)
 	}
 }

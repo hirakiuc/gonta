@@ -18,6 +18,8 @@ type Event interface {
 	String() string
 	ConcreteEvent() Event
 	SetNextId()
+
+	EventType() string
 }
 
 func (event BaseEvent) String() string {
@@ -37,6 +39,10 @@ func (event BaseEvent) ConcreteEvent() Event {
 
 func (event BaseEvent) SetNextId() {
 	event.Id = atomic.AddUint64(&counter, 1)
+}
+
+func (event BaseEvent) EventType() string {
+	return event.Type
 }
 
 type MessageEvent struct {
