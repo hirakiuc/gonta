@@ -6,20 +6,24 @@ import (
 	"../slack"
 )
 
+// EchoPlugin provides Echo response.
 type EchoPlugin struct{}
 
+// GetInstance return a new EchoPlugin instance.
 func (plugin *EchoPlugin) GetInstance() Plugin {
 	return &EchoPlugin{}
 }
 
+// IsAccept check whether this plugin accept the slack.Event or not.
 func (plugin *EchoPlugin) IsAccept(event slack.Event) bool {
 	if event.EventType() == "message" {
 		return true
-	} else {
-		return false
 	}
+
+	return false
 }
 
+// Notify the event to this EchoPlugin.
 func (plugin *EchoPlugin) Notify(session *slack.Session, event slack.Event) {
 	fmt.Println("EchoPlugin:", event)
 	evt, ok := event.(slack.MessageEvent)
