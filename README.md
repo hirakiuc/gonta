@@ -11,6 +11,13 @@ $ make vendor_get
 $ make
 ```
 
+## HowToRun
+
+```
+$ export SLACKA_API_TOKEN='your slack api token'
+$ make run
+```
+
 ## License
 
 see LICENSE
