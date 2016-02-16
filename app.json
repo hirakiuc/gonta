@@ -1,0 +1,12 @@
+{
+  "name": "gonta-keyboards",
+  "description": "smple slack bot in golang",
+  "keywords": [
+    "golang",
+    "slack"
+  ],
+  "image": "heroku/go:1.5",
+  "mount_dir": "src/github.com/hirakiuc/gonta",
+  "website": "https://github.com/hirakiuc/gonta",
+  "repository": "https://github.com/hirakiuc/gonta"
+}
