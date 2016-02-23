@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"../bot"
+
 	simpleJson "github.com/bitly/go-simplejson"
 )
 
@@ -36,6 +38,9 @@ func (api *RtmStartApi) WssUrl() (url string, err error) {
 		log.Error("Failed to parse json: %v", err)
 		return "", err
 	}
+
+	bot := bot.Initialize(js)
+	log.Info(bot.String())
 
 	wss, err := js.Get("url").String()
 	if err != nil {
