@@ -1,6 +1,10 @@
 package plugin
 
-import "../slack"
+import (
+	"fmt"
+
+	"../slack"
+)
 
 // EchoPlugin provides Echo response.
 type EchoPlugin struct{}
@@ -28,14 +32,14 @@ func (plugin *EchoPlugin) Notify(session *slack.Session, event slack.Event) {
 		return
 	}
 
-	msg := slack.BaseEvent{
+	response := slack.BaseEvent{
 		Id:      0,
 		Type:    evt.Type,
 		Channel: evt.Channel,
-		Text:    "Hello !",
+		Text:    fmt.Sprintf("Hello ! I'm %s.", session.Bot.Name),
 	}
 
-	err := session.Send(msg)
+	err := session.Send(response)
 	if err != nil {
 		log.Error("EchoPlugin failed: %v", err)
 	}

@@ -3,6 +3,7 @@ package slack
 import (
 	websocket "golang.org/x/net/websocket"
 
+	"../bot"
 	"../logger"
 )
 
@@ -12,6 +13,7 @@ var log *logger.Logger
 
 type Session struct {
 	Token  string
+	Bot    *bot.SlackBot
 	wssUrl string
 	conn   *websocket.Conn
 }
@@ -74,6 +76,8 @@ func (session *Session) startSession() (err error) {
 	if err != nil {
 		log.Error("Failed to connect Websocket: %v", err)
 	}
+
+	session.Bot = bot.BotInstance()
 
 	return err
 }
