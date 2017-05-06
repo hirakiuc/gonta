@@ -1,0 +1,8 @@
+package: github.com/hirakiuc/gonta
+import:
+- package: github.com/bitly/go-simplejson
+  version: ^0.5.0
+- package: github.com/mgutz/ansi
+- package: golang.org/x/net
+  subpackages:
+  - websocket

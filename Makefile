@@ -1,28 +1,19 @@
 .PHONY: build run lint clean vendor_get vendor_clean vet
 
-GOPATH := ${PWD}/_vendor:${GOPATH}
-export GOPATH
-
 default: build
 
-build: vet
-	go build -v -o ./gonta
+build: check
+	go build
 
 run: build
-	./gonta
+	go run main.go
 
-lint:
-	golint ./main.go ./slack ./logger ./plugin
+check:
+	go vet . ./internal/bot ./internal/slack ./internal/logger ./internal/plugin
+	golint ./main.go ./internal/slack/*.go ./internal/logger/*.go ./internal/plugin/*.go
 
 clean:
-	rm -f ./gonta
+	go clean
 
-vendor_get: vendor_clean
-	gom install
-
-vendor_clean:
-	rm -rf ./_vendor
-	mkdir _vendor
-
-vet:
-	go vet ./
+vendor_get:
+	glide install

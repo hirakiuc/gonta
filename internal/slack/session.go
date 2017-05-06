@@ -3,8 +3,8 @@ package slack
 import (
 	websocket "golang.org/x/net/websocket"
 
-	"../bot"
-	"../logger"
+	"github.com/hirakiuc/gonta/internal/bot"
+	"github.com/hirakiuc/gonta/internal/logger"
 )
 
 const WS_ORIGIN = "https://api.slack.com/"

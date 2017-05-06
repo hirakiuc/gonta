@@ -3,7 +3,7 @@ package plugin
 import (
 	"time"
 
-	"../slack"
+	"github.com/hirakiuc/gonta/internal/slack"
 )
 
 type LoggerPlugin struct{}

@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"../bot"
+	"github.com/hirakiuc/gonta/internal/bot"
 
 	simpleJson "github.com/bitly/go-simplejson"
 )
