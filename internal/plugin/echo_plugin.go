@@ -3,7 +3,7 @@ package plugin
 import (
 	"fmt"
 
-	"../slack"
+	"github.com/hirakiuc/gonta/internal/slack"
 )
 
 // EchoPlugin provides Echo response.

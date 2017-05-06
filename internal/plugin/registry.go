@@ -1,8 +1,8 @@
 package plugin
 
 import (
-	"../logger"
-	"../slack"
+	"github.com/hirakiuc/gonta/internal/logger"
+	"github.com/hirakiuc/gonta/internal/slack"
 )
 
 type Plugin interface {

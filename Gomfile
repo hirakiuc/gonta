@@ -1,7 +1,0 @@
-gom 'github.com/bitly/go-simplejson', :tag => 'v0.5.0'
-gom 'github.com/mgutz/ansi'
-gom 'golang.org/x/net/websocket'
-
-group :development, :test do
-  gom 'github.com/k0kubun/pp'
-end

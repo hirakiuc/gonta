@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
-	"./logger"
-	"./plugin"
-	"./slack"
+	"github.com/hirakiuc/gonta/internal/logger"
+	"github.com/hirakiuc/gonta/internal/plugin"
+	"github.com/hirakiuc/gonta/internal/slack"
 )
 
 var log *logger.Logger
