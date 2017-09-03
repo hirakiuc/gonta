@@ -1,12 +1,20 @@
 hash: 0db6a84f899be2f13e5629714c20795f8427da5610442d3a1303cd8ac163a0c3
-updated: 2017-05-06T22:22:43.098911582+09:00
+updated: 2017-09-03T10:30:35.127252824+09:00
 imports:
 - name: github.com/bitly/go-simplejson
   version: aabad6e819789e569bd6aabf444c935aa9ba1e44
+- name: github.com/mattn/go-colorable
+  version: ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/mgutz/ansi
-  version: c286dcecd19ff979eeb73ea444e479b903f2cfcb
+  version: 9520e82c474b0a04dd04f8a40959027271bab992
 - name: golang.org/x/net
-  version: ebf4034c6712a18e9ed71fcbf3c723c9266ac088
+  version: 7c0e6f5dbdccd94db0b255a9d306a3df70be9a9b
   subpackages:
   - websocket
+- name: golang.org/x/sys
+  version: 7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce
+  subpackages:
+  - unix
 testImports: []
