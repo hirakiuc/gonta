@@ -1,11 +1,16 @@
 {
   "name": "gonta-keyboards",
   "description": "smple slack bot in golang",
+  "env": {
+    "SLACK_API_TOKEN": {
+      "description": "slack api token"
+    }
+  },
   "keywords": [
     "golang",
     "slack"
   ],
-  "image": "heroku/go:1.5",
+  "image": "heroku/go:1.10",
   "mount_dir": "src/github.com/hirakiuc/gonta",
   "website": "https://github.com/hirakiuc/gonta",
   "repository": "https://github.com/hirakiuc/gonta"
