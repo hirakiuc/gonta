@@ -45,7 +45,7 @@ func (api *RtmStartApi) WssUrl() (url string, err error) {
 	wss, err := js.Get("url").String()
 	if err != nil {
 		log.Error("Failed to find wssurl: %v", err)
-		return
+		return "", err
 	}
 
 	return wss, nil
